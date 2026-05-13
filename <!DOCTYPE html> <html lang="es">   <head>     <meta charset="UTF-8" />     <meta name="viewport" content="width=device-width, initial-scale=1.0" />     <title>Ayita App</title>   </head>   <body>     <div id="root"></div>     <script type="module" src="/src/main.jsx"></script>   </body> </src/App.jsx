@@ -17,16 +17,40 @@ const PHASES = [
   { name:'Fase Otoño', emoji:'🍂', range:[18,28], color:'#C97B3A', tip:'Energía descendente · detalles y cierre de ciclos', recs:['Edición','Métricas','Organizar','Finalizar proyectos'] },
 ];
 const ACHS = [
-  { id:'first_task', emoji:'🌱', name:'Primera tarea', desc:'Completaste tu primera tarea', check:s=>s.total>=1 },
-  { id:'streak_3', emoji:'🔥', name:'3 días de racha', desc:'3 días consecutivos activa', check:s=>s.streak>=3 },
-  { id:'streak_7', emoji:'🌿', name:'7 días de racha', desc:'Una semana sin parar', check:s=>s.streak>=7 },
-  { id:'streak_30', emoji:'💚', name:'Un mes de foco', desc:'30 días de racha', check:s=>s.streak>=30 },
-  { id:'perfect_day', emoji:'✨', name:'Día perfecto', desc:'Todas las tareas del día completadas', check:s=>s.perfect>=1 },
-  { id:'perfect_5', emoji:'🌙', name:'5 días perfectos', desc:'5 días perfectos acumulados', check:s=>s.perfect>=5 },
-  { id:'tasks_10', emoji:'⚡', name:'10 tareas', desc:'10 tareas completadas en total', check:s=>s.total>=10 },
-  { id:'tasks_50', emoji:'🏆', name:'50 tareas', desc:'50 tareas completadas', check:s=>s.total>=50 },
-  { id:'first_note', emoji:'📝', name:'Primera nota', desc:'Creaste tu primera nota', check:s=>s.notes>=1 },
-  { id:'focus_5', emoji:'🎯', name:'Modo foco x5', desc:'Usaste el modo foco 5 veces', check:s=>s.focus>=5 },
+  // Primeros pasos
+  { id:'first_task',   emoji:'🌱', name:'Primera semilla',     desc:'Completaste tu primera tarea',              tier:'bronce', check:s=>s.total>=1 },
+  { id:'first_note',   emoji:'📝', name:'Primera idea',        desc:'Creaste tu primera nota rápida',            tier:'bronce', check:s=>s.notes>=1 },
+  { id:'first_focus',  emoji:'🎯', name:'Primera sesión',      desc:'Usaste el modo foco por primera vez',       tier:'bronce', check:s=>s.focus>=1 },
+  // Rachas cortas
+  { id:'streak_3',     emoji:'🔥', name:'Chispa',              desc:'3 días consecutivos activa',                tier:'bronce', check:s=>s.streak>=3 },
+  { id:'streak_7',     emoji:'🌿', name:'Una semana entera',   desc:'7 días sin parar',                          tier:'plata',  check:s=>s.streak>=7 },
+  { id:'streak_14',    emoji:'💫', name:'Dos semanas',         desc:'14 días de racha',                          tier:'plata',  check:s=>s.streak>=14 },
+  { id:'streak_21',    emoji:'🌊', name:'21 días',             desc:'Formaste un hábito real',                   tier:'plata',  check:s=>s.streak>=21 },
+  // Rachas largas
+  { id:'streak_30',    emoji:'🌙', name:'Un mes de foco',      desc:'30 días consecutivos',                      tier:'oro',    check:s=>s.streak>=30 },
+  { id:'streak_60',    emoji:'🌸', name:'Dos meses',           desc:'60 días de racha · tú puedes más',          tier:'oro',    check:s=>s.streak>=60 },
+  { id:'streak_90',    emoji:'🏔️', name:'Tres meses',          desc:'90 días · eres imparable',                  tier:'oro',    check:s=>s.streak>=90 },
+  { id:'streak_180',   emoji:'🦋', name:'Medio año',           desc:'180 días · transformación completa',        tier:'platino',check:s=>s.streak>=180 },
+  { id:'streak_365',   emoji:'👑', name:'Un año contigo',      desc:'365 días · leyenda absoluta',               tier:'platino',check:s=>s.streak>=365 },
+  // Tareas completadas
+  { id:'tasks_10',     emoji:'⚡', name:'Arrancando',          desc:'10 tareas completadas',                     tier:'bronce', check:s=>s.total>=10 },
+  { id:'tasks_25',     emoji:'🌻', name:'25 logradas',         desc:'25 tareas completadas',                     tier:'bronce', check:s=>s.total>=25 },
+  { id:'tasks_50',     emoji:'🏆', name:'50 tareas',           desc:'50 tareas completadas',                     tier:'plata',  check:s=>s.total>=50 },
+  { id:'tasks_100',    emoji:'💯', name:'100 tareas',          desc:'100 tareas completadas',                    tier:'oro',    check:s=>s.total>=100 },
+  { id:'tasks_250',    emoji:'🚀', name:'250 tareas',          desc:'Productividad de élite',                    tier:'oro',    check:s=>s.total>=250 },
+  { id:'tasks_500',    emoji:'🌌', name:'500 tareas',          desc:'Una fuerza de la naturaleza',               tier:'platino',check:s=>s.total>=500 },
+  // Días perfectos
+  { id:'perfect_1',    emoji:'✨', name:'Día perfecto',        desc:'Completaste todas las tareas del día',      tier:'bronce', check:s=>s.perfect>=1 },
+  { id:'perfect_5',    emoji:'🌟', name:'5 días perfectos',   desc:'5 días perfectos acumulados',               tier:'plata',  check:s=>s.perfect>=5 },
+  { id:'perfect_10',   emoji:'💎', name:'10 días perfectos',  desc:'Disciplina consistente',                    tier:'oro',    check:s=>s.perfect>=10 },
+  { id:'perfect_30',   emoji:'🔮', name:'30 días perfectos',  desc:'Un mes de perfección',                      tier:'platino',check:s=>s.perfect>=30 },
+  // Foco
+  { id:'focus_5',      emoji:'🧘', name:'Modo foco x5',       desc:'5 sesiones de foco completadas',            tier:'bronce', check:s=>s.focus>=5 },
+  { id:'focus_25',     emoji:'🎧', name:'Modo foco x25',      desc:'25 sesiones de foco',                       tier:'plata',  check:s=>s.focus>=25 },
+  { id:'focus_100',    emoji:'🔬', name:'Modo foco x100',     desc:'100 sesiones · mente de atleta',            tier:'oro',    check:s=>s.focus>=100 },
+  // Notas
+  { id:'notes_10',     emoji:'📖', name:'10 ideas',           desc:'10 notas guardadas',                        tier:'bronce', check:s=>s.notes>=10 },
+  { id:'notes_50',     emoji:'📚', name:'50 ideas',           desc:'50 notas · tu mente no para',               tier:'plata',  check:s=>s.notes>=50 },
 ];
 
 const playSound = type => {
@@ -105,39 +129,24 @@ export default function Ayita() {
   const [loaded,setLoaded]=useState(false);
   const timerRef=useRef(); const ciRef=useRef(0); const ssRef=useRef(null);
   const achRef=useRef(achs);
-  
   useEffect(()=>{achRef.current=achs;},[achs]);
 
   const D=dark?{bg:'#091A0D',bgD:'#0F2218',bgDD:'#162E1C',card:'#0F2218',border:'#1A3522',ink:'#F5F0E8',muted:'#7AAF88',em:'#4CAF84',emL:'#6DC99A',nav:'#091A0D',inp:'#162E1C'}
     :{bg:'#F5F0E8',bgD:'#EDE6D8',bgDD:'#E0D8C8',card:'#FFFFFF',border:'#E0D8C8',ink:'#1A1209',muted:'#8A7E72',em:'#2E7D5E',emL:'#4CAF84',nav:'#FFFFFF',inp:'#F5F0E8'};
 
-  // PASO 1: CARGA DE DATOS USANDO LOCALSTORAGE
-  useEffect(()=>{
-    const g=(k,fb)=>{
-      try{
-        const r=localStorage.getItem(k);
-        return r?JSON.parse(r):fb;
-      }catch(e){return fb;}
-    };
-    setTasks(g('ay_tasks',[...RECURRING]));
-    setDone(g('ay_done',[]));
-    setNotes(g('ay_notes',[]));
-    setStats(g('ay_stats',{streak:0,best:0,total:0,perfect:0,notes:0,focus:0,lastDate:null}));
-    setAchs(g('ay_achs',[]));
-    setCycle(g('ay_cycle',{last:null,len:28}));
-    setDark(g('ay_dark',false));
+  useEffect(()=>{(async()=>{
+    const g=async(k,fb)=>{try{const r=await window.storage.get(k);return r?JSON.parse(r.value):fb;}catch{return fb;}};
+    setTasks(await g('ay_tasks',[...RECURRING]));
+    setDone(await g('ay_done',[]));
+    setNotes(await g('ay_notes',[]));
+    setStats(await g('ay_stats',{streak:0,best:0,total:0,perfect:0,notes:0,focus:0,lastDate:null}));
+    setAchs(await g('ay_achs',[]));
+    setCycle(await g('ay_cycle',{last:null,len:28}));
+    setDark(await g('ay_dark',false));
     setLoaded(true);
-  },[]);
+  })();},[]);
 
-  // PASO 1: GUARDADO DE DATOS USANDO LOCALSTORAGE
-  const sv=(k,v)=>{ 
-    if(loaded) {
-      try {
-        localStorage.setItem(k,JSON.stringify(v));
-      } catch(e) {}
-    }
-  };
-
+  const sv=(k,v)=>{ if(loaded) window.storage.set(k,JSON.stringify(v)).catch(()=>{}); };
   useEffect(()=>sv('ay_tasks',tasks),[tasks,loaded]);
   useEffect(()=>sv('ay_done',done),[done,loaded]);
   useEffect(()=>sv('ay_notes',notes),[notes,loaded]);
@@ -162,11 +171,7 @@ export default function Ayita() {
     const s={...ns,notes:nl};
     ACHS.forEach(a=>{
       if(!achRef.current.includes(a.id)&&a.check(s)){
-        setAchs(p=>{
-          const u=[...p,a.id];
-          localStorage.setItem('ay_achs',JSON.stringify(u)); // Ajuste aquí también
-          return u;
-        });
+        setAchs(p=>{const u=[...p,a.id];window.storage.set('ay_achs',JSON.stringify(u)).catch(()=>{});return u;});
         setNewAch(a); setTimeout(()=>setModal('ach'),400);
       }
     });
@@ -263,7 +268,12 @@ export default function Ayita() {
       <div style={{background:D.nav,padding:'18px 22px 14px',borderBottom:`1px solid ${D.border}`,boxShadow:dark?'none':'0 1px 16px rgba(0,0,0,0.05)',flexShrink:0}}>
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
           <div>
-            <div style={{fontFamily:"'Playfair Display',serif",fontStyle:'italic',fontSize:27,color:D.em,fontWeight:600,letterSpacing:'-0.5px',lineHeight:1}}>Ayita 🌿</div>
+            <svg width="108" height="32" viewBox="0 0 108 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="26" fontFamily="'Playfair Display',serif" fontStyle="italic" fontWeight="600" fontSize="26" fill={D.em} letterSpacing="-0.5">Ayita</text>
+              <path d="M88 22 Q92 10 98 8 Q94 14 96 20" stroke={D.em} strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+              <path d="M96 20 Q100 8 107 6 Q103 14 104 20" stroke={D.emL} strokeWidth="1.3" fill="none" strokeLinecap="round" opacity="0.7"/>
+              <path d="M92 22 L104 22" stroke={D.em} strokeWidth="1" strokeLinecap="round" opacity="0.35"/>
+            </svg>
             <div style={{fontSize:11,color:D.muted,marginTop:3,fontWeight:300,textTransform:'capitalize'}}>{todayFmt}</div>
           </div>
           <div style={{display:'flex',alignItems:'center',gap:9}}>
@@ -535,21 +545,27 @@ export default function Ayita() {
 
           {sub==='achievements'&&<>
             <Italic style={{marginBottom:4}}>Logros</Italic>
-            <div style={{fontSize:12,color:D.muted,marginBottom:14}}>{achs.length} de {ACHS.length} desbloqueados</div>
-            <div style={{background:D.bgDD,borderRadius:99,height:5,marginBottom:18}}>
+            <div style={{fontSize:12,color:D.muted,marginBottom:10}}>{achs.length} de {ACHS.length} desbloqueados</div>
+            <div style={{background:D.bgDD,borderRadius:99,height:5,marginBottom:16}}>
               <div style={{background:`linear-gradient(90deg,${D.em},${D.emL})`,borderRadius:99,height:5,width:`${(achs.length/ACHS.length)*100}%`,transition:'width 0.5s'}}/>
             </div>
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:9}}>
-              {ACHS.map(a=>{
-                const ok=achs.includes(a.id);
-                return <div key={a.id} style={{background:ok?(dark?'#0F2218':'#EAF5EF'):D.card,borderRadius:16,padding:'16px 13px',border:`1.5px solid ${ok?D.em+'66':D.border}`,opacity:ok?1:0.45,textAlign:'center'}}>
-                  <div style={{fontSize:28,marginBottom:7,filter:ok?'none':'grayscale(1)'}}>{a.emoji}</div>
-                  <div style={{fontSize:12,fontWeight:600,color:ok?D.em:D.muted,marginBottom:3}}>{a.name}</div>
-                  <div style={{fontSize:10,color:D.muted,lineHeight:1.4}}>{a.desc}</div>
-                  {ok&&<div style={{fontSize:9,color:D.em,marginTop:5,fontWeight:700,textTransform:'uppercase',letterSpacing:'0.05em'}}>✓ Desbloqueado</div>}
-                </div>;
-              })}
-            </div>
+            {[['platino',{border:'#C9B458',bg:'#FBF7E4',text:'#A08C20',label:'✦ Platino'}],['oro',{border:'#D4A853',bg:'#FDF5E8',text:'#A07020',label:'● Oro'}],['plata',{border:'#A8ADB8',bg:'#F0F1F4',text:'#6A7180',label:'● Plata'}],['bronce',{border:'#C4875A',bg:'#FBF0E8',text:'#8A5030',label:'● Bronce'}]].map(([tier,tc])=>{
+              const group=ACHS.filter(a=>a.tier===tier);
+              return <div key={tier} style={{marginBottom:20}}>
+                <div style={{fontSize:9.5,color:tc.text,fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:8,paddingLeft:2}}>{tc.label}</div>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+                  {group.map(a=>{
+                    const ok=achs.includes(a.id);
+                    return <div key={a.id} style={{background:ok?(dark?`${tc.border}18`:tc.bg):D.card,borderRadius:14,padding:'14px 12px',border:`1.5px solid ${ok?tc.border:D.border}`,opacity:ok?1:0.38,textAlign:'center',transition:'all 0.2s'}}>
+                      <div style={{fontSize:26,marginBottom:6,filter:ok?'none':'grayscale(1) opacity(0.4)'}}>{a.emoji}</div>
+                      <div style={{fontSize:11.5,fontWeight:700,color:ok?tc.text:D.muted,marginBottom:3,lineHeight:1.2}}>{a.name}</div>
+                      <div style={{fontSize:9.5,color:D.muted,lineHeight:1.4}}>{a.desc}</div>
+                      {ok&&<div style={{fontSize:8.5,color:tc.text,marginTop:6,fontWeight:700,textTransform:'uppercase',letterSpacing:'0.05em',background:`${tc.border}22`,padding:'3px 7px',borderRadius:99,display:'inline-block'}}>✓ Logrado</div>}
+                    </div>;
+                  })}
+                </div>
+              </div>;
+            })}
           </>}
 
           {sub==='settings'&&<>
@@ -574,7 +590,7 @@ export default function Ayita() {
                 </div>
               ))}
             </Card>
-            <button onClick={()=>{setDone([]);sv('ay_done',[]);}} style={{width:'100%',background:'transparent',border:`1px solid ${D.border}`,borderRadius:12,padding:'12px',fontSize:12,color:D.muted,cursor:'pointer',fontFamily:"'DM Sans',sans-serif",marginTop:4}}>Reiniciar día</button>
+            <button onClick={()=>{setDone([]);window.storage.set('ay_done','[]').catch(()=>{});}} style={{width:'100%',background:'transparent',border:`1px solid ${D.border}`,borderRadius:12,padding:'12px',fontSize:12,color:D.muted,cursor:'pointer',fontFamily:"'DM Sans',sans-serif",marginTop:4}}>Reiniciar día</button>
           </>}
         </>}
       </div>
@@ -640,7 +656,7 @@ export default function Ayita() {
         </div>
       </BottomModal>}
 
-      {/* MODALES DE ESTADO */}
+      {/* CHECK / TIMEUP / DISTRACTED */}
       {(modal==='check'||modal==='timeup'||modal==='distracted')&&<CenterModal>
         {modal==='check'&&<>
           <div style={{fontSize:42,marginBottom:12}}>👀</div>
@@ -672,7 +688,7 @@ export default function Ayita() {
         </>}
       </CenterModal>}
 
-      {/* LOGRO DESBLOQUEADO */}
+      {/* ACHIEVEMENT UNLOCK */}
       {modal==='ach'&&newAch&&<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.7)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:300,backdropFilter:'blur(12px)',padding:24}}>
         <div style={{background:D.nav,borderRadius:26,padding:'40px 28px',maxWidth:290,width:'100%',textAlign:'center',boxShadow:'0 24px 60px rgba(0,0,0,0.35)',animation:'popIn 0.3s ease'}}>
           <div style={{fontSize:50,marginBottom:12}}>{newAch.emoji}</div>
@@ -687,6 +703,14 @@ export default function Ayita() {
         @keyframes popIn{from{opacity:0;transform:scale(0.88);}to{opacity:1;transform:scale(1);}}
         *{-webkit-tap-highlight-color:transparent;box-sizing:border-box;}
         input[type="date"]::-webkit-calendar-picker-indicator{filter:${dark?'invert(1)':'none'};cursor:pointer;}
+        ::-webkit-scrollbar{width:0;}
+        button:active{transform:scale(0.96);}
+        select option{background:${dark?'#0F2218':'#fff'};color:${dark?'#F5F0E8':'#1A1209'};}
+        textarea::placeholder,input::placeholder{color:${D.muted};opacity:0.7;}
+      `}</style>
+    </div>
+  );
+}
         ::-webkit-scrollbar{width:0;}
         button:active{transform:scale(0.96);}
         select option{background:${dark?'#0F2218':'#fff'};color:${dark?'#F5F0E8':'#1A1209'};}
